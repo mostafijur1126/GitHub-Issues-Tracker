@@ -17,6 +17,8 @@ const mDicription = document.getElementById("mDicription");
 const assigniName = document.getElementById("assigniName");
 const mPriority = document.getElementById("mPriority");
 
+const loadingSpnner = document.getElementById("loadingSpnner");
+
 
 
 // console.log(motalAssigni.innerHTML)
@@ -41,6 +43,7 @@ function switchTab(btnId) {
 
 let allIssues = [];
 async function allCardLoaded() {
+    showSpeener();
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
     allIssues = data.data;
@@ -52,6 +55,7 @@ async function allCardLoaded() {
 allCardLoaded();
 
 function displayAllIssues(issues) {
+    showSpeener ();
     cardsContainer.innerHTML = "";
     issues.forEach(issue => {
         const innerCard = document.createElement("div");
@@ -90,6 +94,7 @@ function displayAllIssues(issues) {
     });
     // show total count
     totalCounter.innerText = issues.length;
+    hideSpeener();
 };
 
 
@@ -121,11 +126,12 @@ async function openIssueModal(id) {
     issueModal.showModal();
 }
 
-async function serchIssues() {
+// async function serchIssues() {
     
-}
+// }
 
 async function findIssues (){
+    showSpeener();
     scarchText = document.getElementById("searchInput").value.trim();
     if(scarchText === ""){
         return
@@ -141,6 +147,14 @@ document.getElementById("searchBtn").addEventListener("click",()=>{
 })
 
 function showSearchData(searchItem){
-
     displayAllIssues(searchItem);
+}
+
+function showSpeener (){
+    cardsContainer.classList.add("hidden");
+    loadingSpnner.classList.remove("hidden");
+}
+function hideSpeener (){
+    cardsContainer.classList.remove("hidden");
+    loadingSpnner.classList.add("hidden");
 }
