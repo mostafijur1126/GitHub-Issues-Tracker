@@ -17,6 +17,8 @@ const mDicription = document.getElementById("mDicription");
 const assigniName = document.getElementById("assigniName");
 const mPriority = document.getElementById("mPriority");
 
+
+
 // console.log(motalAssigni.innerHTML)
 
 
@@ -59,7 +61,6 @@ function displayAllIssues(issues) {
         innerCard.className = `bg-base-100 p-7 rounded-xl shadow-lg space-y-3 border-t-4 ${borderColor}`;
 
         innerCard.addEventListener("click", () => { openIssueModal(issue.id) });
-        // console.log(issue.id)
 
         const priorityColor = issue.priority === "high" ? "badge-error" : issue.priority === "medium" ? "badge-warning" : "badge-info";
 
@@ -87,7 +88,6 @@ function displayAllIssues(issues) {
         `;
         cardsContainer.append(innerCard);
     });
-
     // show total count
     totalCounter.innerText = issues.length;
 };
@@ -99,47 +99,48 @@ async function openIssueModal(id) {
     const mDetails = data.data;
     ModalTitle.innerText = mDetails.title;
     modalStatus.innerText = mDetails.status;
-        const statusColor = mDetails.status === "open" ? "badge-success" : "badge-primary";
-        modalStatus.classList.add(statusColor);
+    const statusColor = mDetails.status === "open" ? "badge-success" : "badge-primary";
+    modalStatus.classList.add(statusColor);
     motalAssigni.innerHTML = mDetails.assignee;
     mDate.innerText = new Date(mDetails.updatedAt).toLocaleDateString();
 
-        const ModalLsbel = mDetails.labels.map(item => {
-            const lableClor = item === "bug" ? "badge-error" : item === "help wanted" ? "badge-warning" : item === "enhancement" ? "badge-success" : item === "good first issue" ? "badge-info" : "badge-accent";
+    const ModalLsbel = mDetails.labels.map(item => {
+        const lableClor = item === "bug" ? "badge-error" : item === "help wanted" ? "badge-warning" : item === "enhancement" ? "badge-success" : item === "good first issue" ? "badge-info" : "badge-accent";
 
-            return `<div class="badge badge-outline ${lableClor} font-bold">${item}</div>`
+        return `<div class="badge badge-outline ${lableClor} font-bold">${item}</div>`
 
-        }).join("");
+    }).join("");
     modalLaverContainer.innerHTML = ModalLsbel;
-    mDicription.innerText =mDetails.description;
-    assigniName.innerText= mDetails.assignee;
+    mDicription.innerText = mDetails.description;
+    assigniName.innerText = mDetails.assignee;
     mPriority.innerText = mDetails.priority;
-    // console.log(statusColor)
+    const modalPriorityColor = mDetails.priority === "high" ? "badge-error" : mDetails.priority === "medium" ? "badge-warning" : "badge-info";
+    mPriority.classList.remove("badge-error", "badge-warning", "badge-info");
+    mPriority.classList.add(modalPriorityColor);
 
     issueModal.showModal();
 }
 
+async function serchIssues() {
+    
+}
 
+async function findIssues (){
+    scarchText = document.getElementById("searchInput").value.trim();
+    if(scarchText === ""){
+        return
+    }else{
+        const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${scarchText}`);
+        const data = await res.json();
+        showSearchData(data.data);
+    }
+}
 
+document.getElementById("searchBtn").addEventListener("click",()=>{
+    findIssues ();
+})
 
+function showSearchData(searchItem){
 
-
-
-// {
-//     "status": "success",
-//     "message": "Issue fetched successfully",
-//     "data": {
-//         "id": 3,
-//         "title": "Update README with installation instructions",
-//         "description": "The README file needs better installation instructions for new contributors.",
-//         "status": "closed",
-//         "labels": [
-//             "documentation"
-//         ],
-//         "priority": "low",
-//         "author": "mike_docs",
-//         "assignee": "sarah_dev",
-//         "createdAt": "2024-01-10T08:00:00Z",
-//         "updatedAt": "2024-01-12T16:45:00Z"
-//     }
-// }
+    displayAllIssues(searchItem);
+}
