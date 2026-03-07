@@ -67,19 +67,43 @@
             </div>
             <!-- Cards Container -->
             <div id="cardsContainer" class="p-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-5">
-                <!-- <div class="flex justify-between">
-                    <img src="${statusImg}" alt="">
-                    <div class="badge badge-soft ${priorityColor} font-bold">${issue.priority}</div>
-                </div>
-                <h2 class="text-xl font-semibold">${issue.title}</h2>
-                <p class="text-gray-500">${issue.description}</p>
-                <div class=" flex gap-2 flex-wrap">
-                    ${lables}
-                </div>
-                <div class="flex-1 h-px my-4 bg-gray-300"></div>
-                <p class="text-gray-500">#${issue.id} by ${issue.author}</p>
-                <p class="text-gray-500 font-bold">${new Date(issue.createdAt).toLocaleDateString()}</p> -->
+
             </div>
+
+            <!-- Modal section -->
+            <!-- Open the modal using ID.showModal() method -->
+            <dialog id="issueModal" class="modal">
+                <div class="modal-box space-y-5">
+                    <h3 id="ModalTitle" class="text-lg font-bold">Fix broken image uploads</h3>
+                    <div class="flex gap-3 text-gray-400 items-center text-sm">
+                        <div id="modalStatus" class="badge  text-white">Success</div>
+                        <i  class="fa-solid fa-circle text-[5px]"></i>
+                        <p>Opened by <span id="motalAssigni">Fahim Ahmed</span></p>
+                        <i class="fa-solid fa-circle text-[5px]"></i>
+                        <p id="mDate">22/02/2026</p>
+                    </div>
+                    <div id="modalLaverContainer" class="flex flex-wrap gap-2">
+                        
+                    </div>
+                    <p id="mDicription" class="py-4 text-gray-500">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+                    <div class="flex bg-base-200 p-5 rounded-lg">
+                        <div class="flex-1">
+                            <p class="text-gray-500">Assignee:</p>
+                            <p id="assigniName" class="font-semibold">Fahim Ahmed</p>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-gray-500">Priority:</p>
+                            <div id="mPriority" class="badge badge-error text-white">Error</div>
+                        </div>
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-primary">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     </section>
 

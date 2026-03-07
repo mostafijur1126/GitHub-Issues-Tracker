@@ -8,6 +8,17 @@ const totalCounter = document.getElementById("totalCounter");
 let openIssues = [];
 let closedIssues = [];
 
+const ModalTitle = document.getElementById("ModalTitle");
+const modalStatus = document.getElementById("modalStatus");
+const motalAssigni = document.getElementById("motalAssigni");
+const mDate = document.getElementById("mDate");
+const modalLaverContainer = document.getElementById("modalLaverContainer");
+const mDicription = document.getElementById("mDicription");
+const assigniName = document.getElementById("assigniName");
+const mPriority = document.getElementById("mPriority");
+
+// console.log(motalAssigni.innerHTML)
+
 
 function switchTab(btnId) {
     allBtn.classList.add("btn-outline");
@@ -47,6 +58,9 @@ function displayAllIssues(issues) {
 
         innerCard.className = `bg-base-100 p-7 rounded-xl shadow-lg space-y-3 border-t-4 ${borderColor}`;
 
+        innerCard.addEventListener("click", () => { openIssueModal(issue.id) });
+        // console.log(issue.id)
+
         const priorityColor = issue.priority === "high" ? "badge-error" : issue.priority === "medium" ? "badge-warning" : "badge-info";
 
         const statusImg = issue.status === "open" ? "assets/Open-Status.png" : "assets/Closed- Status .png";
@@ -76,4 +90,56 @@ function displayAllIssues(issues) {
 
     // show total count
     totalCounter.innerText = issues.length;
+};
+
+
+async function openIssueModal(id) {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const data = await res.json();
+    const mDetails = data.data;
+    ModalTitle.innerText = mDetails.title;
+    modalStatus.innerText = mDetails.status;
+        const statusColor = mDetails.status === "open" ? "badge-success" : "badge-primary";
+        modalStatus.classList.add(statusColor);
+    motalAssigni.innerHTML = mDetails.assignee;
+    mDate.innerText = new Date(mDetails.updatedAt).toLocaleDateString();
+
+        const ModalLsbel = mDetails.labels.map(item => {
+            const lableClor = item === "bug" ? "badge-error" : item === "help wanted" ? "badge-warning" : item === "enhancement" ? "badge-success" : item === "good first issue" ? "badge-info" : "badge-accent";
+
+            return `<div class="badge badge-outline ${lableClor} font-bold">${item}</div>`
+
+        }).join("");
+    modalLaverContainer.innerHTML = ModalLsbel;
+    mDicription.innerText =mDetails.description;
+    assigniName.innerText= mDetails.assignee;
+    mPriority.innerText = mDetails.priority;
+    // console.log(statusColor)
+
+    issueModal.showModal();
 }
+
+
+
+
+
+
+
+// {
+//     "status": "success",
+//     "message": "Issue fetched successfully",
+//     "data": {
+//         "id": 3,
+//         "title": "Update README with installation instructions",
+//         "description": "The README file needs better installation instructions for new contributors.",
+//         "status": "closed",
+//         "labels": [
+//             "documentation"
+//         ],
+//         "priority": "low",
+//         "author": "mike_docs",
+//         "assignee": "sarah_dev",
+//         "createdAt": "2024-01-10T08:00:00Z",
+//         "updatedAt": "2024-01-12T16:45:00Z"
+//     }
+// }
