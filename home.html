@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <!-- daisy ui and tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- font-awesome-cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>GitHub Issues Tracker</title>
+</head>
+
+<body class="bg-base-300">
+    <!-- navebar section -->
+    <nav class=" bg-base-100 shadow-sm">
+        <div class="navbar w-11/12 m-auto">
+            <div class="flex-1">
+                <div class="flex items-center gap-2">
+                    <img class="w-10 h-10" src="assets/github-logo.png" alt="">
+                    <a class="hidden sm:block text-xl">GitHub Issues Tracker</a>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                <button class="btn btn-primary">New Issue</button>
+            </div>
+        </div>
+    </nav>
+    <section class="w-9/12 m-auto py-12 space-y-5">
+        <!-- tab section -->
+        <div class="flex gap-5 p-5 bg-white shadow-md rounded-md">
+            <button id="allBtn" class="btn btn-primary" onclick="switchTab('allBtn')">All</button>
+            <button id="openBtn" class="btn btn-outline btn-primary" onclick="switchTab('openBtn')">Open</button>
+            <button id="closedBtn" class="btn btn-outline btn-primary" onclick="switchTab('closedBtn')">Closed</button>
+        </div>
+
+
+        <div class="bg-base-200 shadow-md">
+            <!-- Issues Counter -->
+            <div
+                class="flex flex-col sm:flex-row gap-5 p-5 bg-white shadow-md rounded-md sm:justify-between sm:items-center">
+                <div class="flex gap-3 items-center">
+                    <img class="bg-purple-100 w-10 h-10 p-1 rounded-full" src="assets/Aperture.png" alt="">
+                    <div class="">
+                        <h3 class="font-bold text-lg"><span>50</span> Issues</h3>
+                        <p class="text-sm text-gray-500">Track and manage your project issues</p>
+                    </div>
+                </div>
+                <div class="flex gap-3 text-sm">
+                    <p class="flex items-center gap-1"><i id="openCircle" class="fa-solid fa-circle text-green-600"></i>
+                        Open</p>
+                    <p class="flex items-center gap-1"><i id="closedCircle"
+                            class="fa-solid fa-circle text-purple-600"></i>
+                        Cloded</p>
+                </div>
+            </div>
+            <!-- Cards Container -->
+            <div id="cardsContainer" class="p-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-5">
+                <div class="flex justify-between">
+                    <img src="${statusImg}" alt="">
+                    <div class="badge badge-soft ${priorityColor} font-bold">${issue.priority}</div>
+                </div>
+                <h2 class="text-xl font-semibold">${issue.title}</h2>
+                <p class="text-gray-500">${issue.description}</p>
+                <div class=" flex gap-2 flex-wrap">
+                    ${lables}
+                </div>
+                <div class="flex-1 h-px my-4 bg-gray-300"></div>
+                <p class="text-gray-500">#${issue.id} by ${issue.author}</p>
+                <p class="text-gray-500 font-bold">${new Date(issue.createdAt).toLocaleDateString()}</p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script src="js/home.js"></script>
+</body>
+
+</html>

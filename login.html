@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <!-- daisy ui and tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- font-awesome-cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>GitHub Issues Tracker</title>
+</head>
+
+<body>
+    <div class="flex items-center justify-center h-[100vh] ">
+        <div class="bg-white shadow-2xl p-10 rounded-lg">
+            <div class="flex flex-col justify-center items-center ">
+                <img src="assets/github-logo.png" alt="GitHub">
+                <h2 class="py-2 text-2xl font-bold">GitHub Issues Tracker</h2>
+                <p>Sign in to manage your issues</p>
+            </div>
+            <div class="login-form">
+                <fieldset class=" p-4 rounded-lg space-y-3">
+                    <div>
+                        <label for="username" class="block">Username</label>
+                        <input class="border p-2 w-full rounded" type="text" name="" id="username"
+                            placeholder="Enter Username">
+                    </div>
+                    <div>
+                        <label for="password" class="block">Password</label>
+                        <input class="border p-2 w-full rounded" type="password" name="" id="password"
+                            placeholder="Enter Password">
+                    </div>
+                    <button id="singUpBtn" class="btn btn-primary w-full">Sign In</button>
+                    <div class="flex items-center gap-4 my-3 text-gray-400">
+                        <div class="flex-1 h-px bg-gray-300"></div>
+                        <span class="text-sm font-medium">OR</span>
+                        <div class="flex-1 h-px bg-gray-300"></div>
+                    </div>
+                    <div class="text-center ">
+                        <p>Demo Credentials:</p>
+                        <div class="bg-gray-100 p-5 rounded">
+                            <p class="text-gray-400"><span class="font-bold ">Username: </span>admin</p>
+                            <p class="text-gray-400"><span class="font-bold">Password: </span>admin123</p>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="login-details"></div>
+        </div>
+    </div>
+
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>
