@@ -53,7 +53,7 @@
                 <div class="flex gap-3 items-center">
                     <img class="bg-purple-100 w-10 h-10 p-1 rounded-full" src="assets/Aperture.png" alt="">
                     <div class="">
-                        <h3 class="font-bold text-lg"><span>50</span> Issues</h3>
+                        <h3 class="font-bold text-lg"><span id="totalCounter">0</span> Issues</h3>
                         <p class="text-sm text-gray-500">Track and manage your project issues</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             </div>
             <!-- Cards Container -->
             <div id="cardsContainer" class="p-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-5">
-                <div class="flex justify-between">
+                <!-- <div class="flex justify-between">
                     <img src="${statusImg}" alt="">
                     <div class="badge badge-soft ${priorityColor} font-bold">${issue.priority}</div>
                 </div>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="flex-1 h-px my-4 bg-gray-300"></div>
                 <p class="text-gray-500">#${issue.id} by ${issue.author}</p>
-                <p class="text-gray-500 font-bold">${new Date(issue.createdAt).toLocaleDateString()}</p>
+                <p class="text-gray-500 font-bold">${new Date(issue.createdAt).toLocaleDateString()}</p> -->
             </div>
         </div>
     </section>
