@@ -106,7 +106,8 @@ async function openIssueModal(id) {
     modalStatus.innerText = mDetails.status;
     const statusColor = mDetails.status === "open" ? "badge-success" : "badge-primary";
     modalStatus.classList.add(statusColor);
-    motalAssigni.innerHTML = mDetails.assignee;
+    const assignee = mDetails.assignee || "Not Assigned Yet";
+    motalAssigni.innerHTML = assignee;
     mDate.innerText = new Date(mDetails.updatedAt).toLocaleDateString();
 
     const ModalLsbel = mDetails.labels.map(item => {
@@ -117,7 +118,7 @@ async function openIssueModal(id) {
     }).join("");
     modalLaverContainer.innerHTML = ModalLsbel;
     mDicription.innerText = mDetails.description;
-    assigniName.innerText = mDetails.assignee;
+    assigniName.innerText = assignee;
     mPriority.innerText = mDetails.priority;
     const modalPriorityColor = mDetails.priority === "high" ? "badge-error" : mDetails.priority === "medium" ? "badge-warning" : "badge-info";
     mPriority.classList.remove("badge-error", "badge-warning", "badge-info");
